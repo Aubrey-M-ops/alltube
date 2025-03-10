@@ -1,0 +1,63 @@
+#container.ytd-masthead {
+  height: 60px;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #0c0c0c;
+  #start.ytd-masthead,
+  #end.ytd-masthead {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    #guide-button.ytd-masthead {
+      margin: 0;
+      padding: 8px;
+      margin-right: 8px;
+      box-sizing: border-box;
+      img {
+        width: 60px;
+        height: 60px;
+      }
+    }
+    #logo.ytd-masthead {
+      img {
+        width: 136px;
+        height: 60px;
+      }
+    }
+    #account-info {
+      height: 60px;
+      overflow: hidden;
+      img{
+        width: 246px;
+        height: 64px;
+      }
+    }
+  }
+}
+
+#background.ytd-masthead {
+  z-index: -1;
+  opacity: 1;
+  position: absolute;
+  height: 56px;
+  width: 100%;
+}
+
+#center.ytd-masthead {
+  flex: 0 1 732px;
+  min-width: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  #search-bar {
+    img{
+      height: 100%;
+      max-width: 732px;
+    }
+  }
+}

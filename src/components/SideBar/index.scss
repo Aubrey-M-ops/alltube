@@ -1,0 +1,35 @@
+@mixin font-settings {
+  font-family: "Roboto", "Noto", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#sidebar {
+  width: 260px;
+  height: 100%;
+  background-color: black;
+  .ant-menu {
+    background-color: black;
+    padding: 12px;
+    color: rgb(241, 241, 241);
+    .ant-menu-item {
+      .ant-menu-title-content {
+        @include font-settings;
+        padding-left: 16px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        flex: 1;
+        flex-basis: 0.000000001px;
+        text-align: left;
+      }
+      &-selected {
+        background-color: rgba(255, 255, 255, 0.1);
+        font-weight: 500;
+      }
+      &-divider{
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+}
