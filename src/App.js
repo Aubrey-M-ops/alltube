@@ -4,18 +4,21 @@ import Playlist from "pages/playlist";
 import TopBar from "@components/TopBar";
 import SideBar from "@components/SideBar";
 import { Layout } from "antd";
+import { useState } from "react";
 
 import "./App.css";
 
 const { Sider, Content } = Layout;
 
 function App() {
+  const [collapsed, setCollapsed] = useState(false);
+
   return (
     <Router>
       <div className="App">
-        <TopBar />
+        <TopBar toggleSidebar={() => setCollapsed(prev => !prev)} />
         <Layout>
-          <Sider>
+          <Sider collapsible collapsed={collapsed} width={260} collapsedWidth={60}>
             <SideBar />
           </Sider>
           <Content className="content">
