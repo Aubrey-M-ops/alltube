@@ -1,11 +1,12 @@
 import React from 'react';
 
 import VideoPlayer from '@components/VideoPlayer';
+import './index.scss'
 
-const VideoPage = () => {
+const VideoPage = ({videoItem}) => {
     return (
-        <div>
-            <VideoPlayer />
+        <div className="video-player">
+            <VideoPlayer videoItem={videoItem} />
         </div>
     )
 };
