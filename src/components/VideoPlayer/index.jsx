@@ -1,22 +1,25 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useRef } from "react";
+import DPlayer from "dplayer";
 import "./index.scss";
-import Video from "@assets/videos/movie.mp4"
 
-const VideoPlayer = () => {
+const VideoPlayer = ({ videoItem }) => {
+  const playerRef = useRef(null);
 
-    let { video_id } = useParams();
+  useEffect(() => {
+    if (!playerRef.current) return;
 
-    useEffect(() => {
+    const dp = new DPlayer({
+      container: playerRef.current,
+      video: {
+        url: videoItem.videoUrl,
+        type: "hls",
+      },
+    });
 
+    return () => dp.destroy();
+  }, []);
 
-    }, []);
-
-    return (
-        <div>
-            <video className="alltube_video_player" src={Video} controls />
-        </div>
-    );
+  return <div ref={playerRef} style={{ width: "100%", height: "500px" }} />;
 };
 
 export default VideoPlayer;
