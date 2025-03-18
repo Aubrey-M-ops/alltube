@@ -3,6 +3,7 @@ import HomePage from "pages/homePage";
 import Playlist from "pages/playlist";
 import TopBar from "@components/TopBar";
 import SideBar from "@components/SideBar";
+import VideoPage from "pages/videoPage";
 import { Layout } from "antd";
 
 import "./App.css";
@@ -22,6 +23,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/playlist" element={<Playlist />} />
+              <Route path="/video/:video_id" exact element={<VideoPage />} />
             </Routes>
           </Content>
         </Layout>
