@@ -1,4 +1,7 @@
 #container.ytd-masthead {
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
   height: 60px;
   padding: 0 16px;
   display: flex;

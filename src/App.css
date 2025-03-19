@@ -1,7 +1,13 @@
 .App {
   text-align: center;
 }
-
+.ant-layout-sider {
+  width: 256px !important;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  z-index: 1000;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
