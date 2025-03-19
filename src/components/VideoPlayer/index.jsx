@@ -10,9 +10,9 @@ const VideoPlayer = ({ videoItem }) => {
 
     const dp = new DPlayer({
       container: playerRef.current,
+      autoplay: true,
       video: {
         url: videoItem.videoUrl,
-        type: "hls",
       },
     });
 

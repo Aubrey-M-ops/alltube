@@ -21,6 +21,7 @@ const TopBar = () => {
             id="logo"
             className="style-scope ytd-masthead"
             styles="cursor: hover"
+            onClick={() => (window.location.href = "/")}
           >
             <img src={youtubeLogo} />
           </a>
