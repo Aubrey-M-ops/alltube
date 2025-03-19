@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/alltube/static/css/main.5c68f88e.css",
+    "main.js": "/alltube/static/js/main.5247a56b.js",
+    "static/media/down-right.png": "/alltube/static/media/down-right.4716e752ae69099b7d50.png",
+    "static/media/down-left.png": "/alltube/static/media/down-left.7b2460b1143d26f9d848.png",
+    "static/media/account-info.png": "/alltube/static/media/account-info.4fe22f7e64199a780c36.png",
+    "static/media/search-bar.png": "/alltube/static/media/search-bar.9482e843b3ed05d95a96.png",
+    "index.html": "/alltube/index.html",
+    "main.5c68f88e.css.map": "/alltube/static/css/main.5c68f88e.css.map",
+    "main.5247a56b.js.map": "/alltube/static/js/main.5247a56b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5c68f88e.css",
+    "static/js/main.5247a56b.js"
+  ]
+}
