@@ -1,8 +1,8 @@
 import React from "react";
-import youtubeLogo from "@assets/images/youtube-logo.png";
 import guideToggle from "@assets/images/guide-button.png";
 import searchBar from "@assets/images/search-bar.png";
 import accountInfo from "@assets/images/account-info.png";
+import alltubeLogo from "@assets/images/alltube-home.jpg";
 
 import "./index.scss";
 
@@ -23,7 +23,7 @@ const TopBar = () => {
             styles="cursor: hover"
             onClick={() => (window.location.href = "/")}
           >
-            <img src={youtubeLogo} />
+            <img src={alltubeLogo} />
           </a>
         </div>
         {/* search bar */}
