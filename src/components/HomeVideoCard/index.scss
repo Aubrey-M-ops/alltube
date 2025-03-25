@@ -3,15 +3,32 @@
   color: white !important;
   padding: 2px 8px 32px 8px;
   cursor: pointer;
-  &-ad {
-    border: #f0ca2c 1.5px solid;
+  &-cover-ad {
+    border: #f0ca2c 2.5px solid;
+    padding: 2px;
   }
   .ant-card {
     &-cover {
       height: 220px;
+      position: relative;
       img {
         height: 100%;
         border-radius: 8px;
+      }
+      button {
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        width: 40px;
+        height: 40px;
+        background-color: #f0ca2c;
+        opacity: 0.9;
+        border: none;
+        transition: background 0.3s ease-in-out;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        &:hover {
+          background: linear-gradient(45deg, #f0ca2c, #ff9800);
+        }
       }
     }
     &-body {
@@ -41,7 +58,8 @@
   }
 }
 .homepage-card:hover {
-    box-shadow: -10px 8px 20px rgba(255, 255, 255, 0.1), 10px 8px 20px rgba(255, 255, 255, 0.1);
-    transform: translateY(-3px);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-  }
+  box-shadow: -10px 8px 20px rgba(255, 255, 255, 0.1),
+    10px 8px 20px rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
