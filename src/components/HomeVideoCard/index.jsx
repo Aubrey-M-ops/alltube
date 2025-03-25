@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import OutSiteIcon from "@assets/icons/OutSite";
-import { Avatar, Card, Tooltip } from "antd";
+import { Avatar, Card, Tooltip, Button } from "antd";
 const { Meta } = Card;
 import "./index.scss";
 
@@ -26,13 +26,18 @@ const HomeVideoCard = ({ videoData }) => {
             alt="video_screenshot"
             src={video_screenshot_url}
           />
-          <Tooltip
-            className="homepage-card-tooltip"
-            title="Ad"
-            visible={videoData.isAd}
-          >
-            <OutSiteIcon />
-          </Tooltip>
+          {videoData.isAd ? (
+            <Tooltip title="Visit the site">
+              <Button
+                shape="circle"
+                icon={<OutSiteIcon />}
+                onClick={(e) => {
+                  window.open("https://colab.google/", "_blank");
+                  e.stopPropagation();
+                }}
+              />
+            </Tooltip>
+          ) : null}
         </>
       }
       onClick={() => {
@@ -42,7 +47,14 @@ const HomeVideoCard = ({ videoData }) => {
       <Meta
         avatar={<Avatar src={avatar_url} />}
         title={video_title}
-        description={video_description}
+        description={
+          <>
+            {videoData.isAd ? (
+              <strong style={{ color: "white" }}>sponsored · </strong>
+            ) : null}
+            {video_description}
+          </>
+        }
       />
     </Card>
   );
