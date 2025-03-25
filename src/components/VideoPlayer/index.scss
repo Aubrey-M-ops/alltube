@@ -5,14 +5,26 @@
   }
 }
 
-#decSeekTimeBtn {
-  cursor: pointer;
-}
-
-#incSeekTime {
-  cursor: pointer;
+.seek-value-label {
+  font-size: 12px;
 }
 
 #seektime-setting-tracker {
   margin-bottom: 10px;
+}
+
+button {
+  width: 15px;
+  height: 15px;
+  text-align: center;
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+  transition-duration: 0.4s;
+}
+
+.activate-button:hover {
+  background-color: grey;
+  color: white;
+  cursor: pointer;
 }
