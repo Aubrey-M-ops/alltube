@@ -1,6 +1,7 @@
 import React from "react";
 import classNames from "classnames";
-import { Avatar, Card } from "antd";
+import OutSiteIcon from "@assets/icons/OutSite";
+import { Avatar, Card, Tooltip } from "antd";
 const { Meta } = Card;
 import "./index.scss";
 
@@ -14,11 +15,26 @@ const HomeVideoCard = ({ videoData }) => {
   } = videoData;
   return (
     <Card
-      className={classNames("homepage-card", {
-        "homepage-card-ad": videoData.isAd,
-      })}
+      className="homepage-card"
       variant="borderless"
-      cover={<img alt="video_screenshot" src={video_screenshot_url} />}
+      cover={
+        <>
+          <img
+            className={classNames("homepage-card-cover", {
+              "homepage-card-cover-ad": videoData.isAd,
+            })}
+            alt="video_screenshot"
+            src={video_screenshot_url}
+          />
+          <Tooltip
+            className="homepage-card-tooltip"
+            title="Ad"
+            visible={videoData.isAd}
+          >
+            <OutSiteIcon />
+          </Tooltip>
+        </>
+      }
       onClick={() => {
         window.location.href = `/video?video_id=${video_id}`;
       }}

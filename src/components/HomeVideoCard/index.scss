@@ -3,8 +3,9 @@
   color: white !important;
   padding: 2px 8px 32px 8px;
   cursor: pointer;
-  &-ad {
-    border: #f0ca2c 1.5px solid;
+  &-cover-ad {
+    border: #f0ca2c 2.5px solid;
+    padding: 2px;
   }
   .ant-card {
     &-cover {
