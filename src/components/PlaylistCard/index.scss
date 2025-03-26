@@ -1,0 +1,60 @@
+.playlistpage-card {
+  width: 400px;  // 设置固定宽度
+  margin: 12px;  // 增加间距，防止卡片贴在一起
+  background-color: transparent;
+  color: white !important;
+  cursor: pointer;
+
+  .ant-card {
+    width: 100%;
+    &-cover {
+      height: 180px; // 适配缩略图高度
+      position: relative;
+      img {
+        height: 100%;
+        width: 100%; 
+        border-radius: 8px;
+        object-fit: cover; // 保证缩略图适应卡片
+      }
+      button {
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        width: 40px;
+        height: 40px;
+        background-color: #f0ca2c;
+        opacity: 0.9;
+        border: none;
+        transition: background 0.3s ease-in-out;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        &:hover {
+          background: linear-gradient(45deg, #f0ca2c, #ff9800);
+        }
+      }
+    }
+    &-body {
+      padding: 12px;
+    }
+    &-meta-title {
+      color: white;
+    }
+    &-meta-description {
+      color: #aaaaaa;
+    }
+    &:hover {
+      box-shadow: -10px 8px 20px rgba(255, 255, 255, 0.1),
+                  10px 8px 20px rgba(255, 255, 255, 0.1);
+      transform: translateY(-5px);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      z-index: 10; // 让 hover 之后的卡片浮起来，不被其他元素挡住
+    }
+  }
+}
+
+.playlist-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; // 让卡片左对齐排列
+  gap: 16px;
+  padding: 16px;
+}
