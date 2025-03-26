@@ -6,6 +6,7 @@ import "./index.scss";
 const VideoPlayer = ({ videoItem }) => {
 
   const playerRef = useRef(null);
+  let videoRendered = false;
   let seekTime = 5;
 
   const vids_less_5_min = [5];
@@ -13,7 +14,7 @@ const VideoPlayer = ({ videoItem }) => {
   const vids_less_1_h = [5, 10, 20, 30];
   const vids_more_1_h = [5, 10, 20, 30, 60];
 
-  let vids_seek_option = [];
+  let vids_seek_option = vids_less_5_min;
   let vids_seek_index = 0;
 
   useEffect(() => {
@@ -28,6 +29,7 @@ const VideoPlayer = ({ videoItem }) => {
       },
     });
 
+
     // Auto-pausing
     dp.on('fullscreen', () => {
       dp.pause();
@@ -37,9 +39,11 @@ const VideoPlayer = ({ videoItem }) => {
       dp.pause();
     });
 
+    /*
     dp.on('volumechange', () => {
       dp.pause();
     });
+    */
 
     dp.on('canplay', () => {
       if (dp.video.duration < 300) {
@@ -55,6 +59,8 @@ const VideoPlayer = ({ videoItem }) => {
       // Just for debugging
       vids_seek_option = vids_more_1_h;
 
+      document.getElementById('incSeekTime').removeAttribute("disabled");
+      document.getElementById('incSeekTime').classList.add('activate-button');
 
       if (vids_seek_index === 0) {
         document.getElementById('decSeekTimeBtn').setAttribute("disabled", "disabled");
@@ -66,7 +72,12 @@ const VideoPlayer = ({ videoItem }) => {
         document.getElementById('incSeekTime').classList.remove('activate-button');
       }
 
-
+      /*
+      if (!videoRendered) {
+        dp.play();
+        videoRendered = !videoRendered;
+      }
+        */
     });
 
     window.addEventListener('scroll', () => {
@@ -87,6 +98,12 @@ const VideoPlayer = ({ videoItem }) => {
     seektime_setting_tracker.setAttribute("id", "seektime-setting-tracker");
     seektime_setting_tracker.innerHTML = `<span>Seek Time</span> <button id='decSeekTimeBtn' class='activate-button'>-</button> <span id='seektime-value' class='seek-value-label'>${vids_less_5_min[0]} sec</span> <button id='incSeekTime' class='activate-button'>+</button>`
     setting_panel.prepend(seektime_setting_tracker);
+
+    // Initially disable the seek button
+    document.getElementById('decSeekTimeBtn').setAttribute("disabled", "disabled");
+    document.getElementById('decSeekTimeBtn').classList.remove('activate-button');
+    document.getElementById('incSeekTime').setAttribute("disabled", "disabled");
+    document.getElementById('incSeekTime').classList.remove('activate-button');
 
     const updateSeekTime = () => {
       document.getElementById('seektime-value').innerHTML = `${vids_seek_option[vids_seek_index]} sec`;
@@ -148,6 +165,7 @@ const VideoPlayer = ({ videoItem }) => {
 
       }
     });
+
 
     return () => dp.destroy();
   }, []);
