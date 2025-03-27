@@ -1,11 +1,21 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, forwardRef, useImperativeHandle } from "react";
 import DPlayer from "dplayer";
 import YouTube, { YouTubeProps } from 'react-youtube';
 import "./index.scss";
 
-const VideoPlayer = ({ videoItem }) => {
-
+const VideoPlayer = forwardRef(({ videoItem, onTimeUpdate, onDuration }, ref) => {
   const playerRef = useRef(null);
+  const playerInstanceRef = useRef(null);
+  const videoElementRef = useRef(null);
+
+  useImperativeHandle(ref, () => ({
+    seekTo: (time) => {
+      if (playerInstanceRef.current) {
+        playerInstanceRef.current.seek(time);
+      }
+    }
+  }));
+
   let videoRendered = false;
   let seekTime = 5;
 
@@ -18,17 +28,34 @@ const VideoPlayer = ({ videoItem }) => {
   let vids_seek_index = 0;
 
   useEffect(() => {
-    if (!playerRef.current) return;
+    if (!playerRef.current || !videoItem?.videoUrl) return;
 
-    const dp = new DPlayer({
-      container: playerRef.current,
-      autoplay: true,
-      hotkey: false,
-      video: {
-        url: videoItem.videoUrl,
-      },
-    });
+    try {
+      const dp = new DPlayer({
+        container: playerRef.current,
+        autoplay: true,
+        hotkey: false,
+        video: {
+          url: videoItem.videoUrl,
+        },
+      });
 
+      playerInstanceRef.current = dp;
+      videoElementRef.current = dp.video;
+
+      const handleTimeUpdate = () => {
+        onTimeUpdate?.(dp.video.currentTime);
+      };
+
+      const handleLoadedMetadata = () => {
+        onDuration?.(dp.video.duration);
+      };
+
+      // Use native event listeners
+      if (videoElementRef.current) {
+        videoElementRef.current.addEventListener('timeupdate', handleTimeUpdate);
+        videoElementRef.current.addEventListener('loadedmetadata', handleLoadedMetadata);
+      }
 
     // Auto-pausing
     dp.on('fullscreen', () => {
@@ -167,41 +194,27 @@ const VideoPlayer = ({ videoItem }) => {
     });
 
 
-    return () => dp.destroy();
-  }, []);
+    return () => {
+        if (videoElementRef.current) {
+          videoElementRef.current.removeEventListener(
+            "timeupdate",
+            handleTimeUpdate
+          );
+          videoElementRef.current.removeEventListener(
+            "loadedmetadata",
+            handleLoadedMetadata
+          );
+        }
+        dp.destroy();
+      };
+    } catch (error) {
+      console.error("Video player initialization error:", error);
+    }
+  }, [videoItem.videoUrl, onTimeUpdate, onDuration]);
 
-
-
-  const onPlayerReady = (event) => {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo();
-
-  }
-
-
-  const onMultitasking = (event) => {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo();
-
-  }
-
-
-
-  const opts = {
-    height: '500',
-    width: '100%',
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
-    },
-  };
-
-
-  return <div ref={playerRef} style={{ width: "100%", height: "500px" }} />;
-
-
-  // return <YouTube videoId="bKQ36GjaBo8" opts={opts} onReady={onPlayerReady} />;
-};
+  return videoItem?.videoUrl ? (
+    <div ref={playerRef} className="video-player-container" style={{ width: "100%", height: "500px" }} />
+  ) : null;
+});
 
 export default VideoPlayer;
-// ::before
