@@ -40,28 +40,6 @@ console.log(videoItem,video_id, 123123213)
         <Content className="content">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/playlist" element={<Playlist />} />
-            <Route path="/video" element={<VideoPage videoItem={videoItem} />} />
-          </Routes>
-        </Content>
-      </Layout>
-    </div>
-  );
-}
-
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <TopBar />
-        <Layout>
-          <Sider>
-            <SideBar />
-          </Sider>
-        
-        <Content className="content">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
             <Route path="/playlist" element={<Navigate to="/playlist/0" />} />
             <Route path="/playlist/:id" element={<PlaylistPage  />} />
             <Route path="/video" element={<VideoPage videoItem={videoItem} />} />
@@ -69,7 +47,6 @@ function App() {
         </Content>
       </Layout>
     </div>
-    </Router>
   );
 }
 
