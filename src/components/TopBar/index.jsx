@@ -6,14 +6,14 @@ import alltubeLogo from "@assets/images/alltube-home.jpg";
 
 import "./index.scss";
 
-const TopBar = () => {
+const TopBar = ({ toggleSidebar }) => {
   return (
     <>
       <div id="background" className="style-scope ytd-masthead"></div>
       <div id="container" className="style-scope ytd-masthead">
         <div id="start" className="style-scope ytd-masthead">
           {/* Start toggle */}
-          <a id="guide-button" className="style-scope ytd-masthead">
+          <a id="guide-button" className="style-scope ytd-masthead" onClick={toggleSidebar} >
             <img src={guideToggle} />
           </a>
           {/* start logo */}

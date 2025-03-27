@@ -1,0 +1,19 @@
+.playlist-page {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100vh;
+    padding-left: 300px; // 为 Sidebar 留出 300px 空间
+    padding-top: 60px;
+  }
+  
+  .playlist-container {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 16px;
+    gap: 16px;
+    overflow-y: auto;
+  }
+  

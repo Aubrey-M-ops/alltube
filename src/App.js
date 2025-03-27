@@ -4,9 +4,10 @@ import {
   Route,
   useLocation,
   useParams,
+  Navigate,
 } from "react-router-dom";
 import HomePage from "pages/homePage";
-import Playlist from "pages/playlist";
+import PlaylistPage from "pages/playlistPage";
 import VideoPage from "pages/videoPage";
 import TopBar from "@components/TopBar";
 import SideBar from "@components/SideBar";
@@ -14,6 +15,7 @@ import { Layout } from "antd";
 
 import "./App.css";
 import { video_data } from "data/VideoData";
+import { playlist_data } from "data/PlayListData";
 
 const { Sider, Content } = Layout;
 
@@ -38,7 +40,8 @@ console.log(videoItem,video_id, 123123213)
         <Content className="content">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/playlist" element={<Playlist />} />
+            <Route path="/playlist" element={<Navigate to="/playlist/0" />} />
+            <Route path="/playlist/:id" element={<PlaylistPage  />} />
             <Route path="/video" element={<VideoPage videoItem={videoItem} />} />
           </Routes>
         </Content>
