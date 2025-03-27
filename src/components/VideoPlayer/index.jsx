@@ -6,7 +6,16 @@ import "./index.scss";
 const VideoPlayer = ({ videoItem }) => {
 
   const playerRef = useRef(null);
+  let videoRendered = false;
   let seekTime = 5;
+
+  const vids_less_5_min = [5];
+  const vids_less_15_min = [5, 10, 20];
+  const vids_less_1_h = [5, 10, 20, 30];
+  const vids_more_1_h = [5, 10, 20, 30, 60];
+
+  let vids_seek_option = vids_less_5_min;
+  let vids_seek_index = 0;
 
   useEffect(() => {
     if (!playerRef.current) return;
@@ -20,6 +29,7 @@ const VideoPlayer = ({ videoItem }) => {
       },
     });
 
+
     // Auto-pausing
     dp.on('fullscreen', () => {
       dp.pause();
@@ -29,9 +39,46 @@ const VideoPlayer = ({ videoItem }) => {
       dp.pause();
     });
 
+    /*
     dp.on('volumechange', () => {
       dp.pause();
-    })
+    });
+    */
+
+    dp.on('canplay', () => {
+      if (dp.video.duration < 300) {
+        vids_seek_option = vids_less_5_min;
+      } else if (dp.video.duration < 900) {
+        vids_seek_option = vids_less_15_min;
+      } else if (dp.video.duration < 3600) {
+        vids_seek_option = vids_less_1_h;
+      } else {
+        vids_seek_option = vids_more_1_h;
+      }
+
+      // Just for debugging
+      vids_seek_option = vids_more_1_h;
+
+      document.getElementById('incSeekTime').removeAttribute("disabled");
+      document.getElementById('incSeekTime').classList.add('activate-button');
+
+      if (vids_seek_index === 0) {
+        document.getElementById('decSeekTimeBtn').setAttribute("disabled", "disabled");
+        document.getElementById('decSeekTimeBtn').classList.remove('activate-button');
+      }
+
+      if (vids_seek_index === vids_seek_option.length - 1) {
+        document.getElementById('incSeekTime').setAttribute("disabled", "disabled");
+        document.getElementById('incSeekTime').classList.remove('activate-button');
+      }
+
+      /*
+      if (!videoRendered) {
+        dp.play();
+        videoRendered = !videoRendered;
+      }
+        */
+    });
 
     window.addEventListener('scroll', () => {
       dp.pause();
@@ -49,24 +96,54 @@ const VideoPlayer = ({ videoItem }) => {
     let setting_panel = (document.getElementsByClassName('dplayer-setting-origin-panel'))[0];
     let seektime_setting_tracker = document.createElement("div");
     seektime_setting_tracker.setAttribute("id", "seektime-setting-tracker");
-    seektime_setting_tracker.innerHTML = `<span>Seek Time</span> <span id='decSeekTimeBtn'>-</span> <span id='seektime-value'>${seekTime} sec</span> <span id='incSeekTime'>+</span>`
+    seektime_setting_tracker.innerHTML = `<span>Seek Time</span> <button id='decSeekTimeBtn' class='activate-button'>-</button> <span id='seektime-value' class='seek-value-label'>${vids_less_5_min[0]} sec</span> <button id='incSeekTime' class='activate-button'>+</button>`
     setting_panel.prepend(seektime_setting_tracker);
 
+    // Initially disable the seek button
+    document.getElementById('decSeekTimeBtn').setAttribute("disabled", "disabled");
+    document.getElementById('decSeekTimeBtn').classList.remove('activate-button');
+    document.getElementById('incSeekTime').setAttribute("disabled", "disabled");
+    document.getElementById('incSeekTime').classList.remove('activate-button');
+
     const updateSeekTime = () => {
-      document.getElementById('seektime-value').innerHTML = `${seekTime} sec`;
+      document.getElementById('seektime-value').innerHTML = `${vids_seek_option[vids_seek_index]} sec`;
     }
 
     document.getElementById('decSeekTimeBtn').addEventListener('click', () => {
-      if (seekTime > 5) {
-        seekTime -= 5;
+      if (vids_seek_option.length === 1) {
+        return;
+      }
+
+      if (vids_seek_index > 0) {
+        vids_seek_index -= 1;
+
+        document.getElementById('incSeekTime').removeAttribute("disabled");
+        document.getElementById('incSeekTime').classList.add('activate-button');
+
+        if (vids_seek_index === 0) {
+          document.getElementById('decSeekTimeBtn').setAttribute("disabled", "disabled");
+          document.getElementById('decSeekTimeBtn').classList.remove('activate-button');
+        }
       }
 
       updateSeekTime();
     });
 
     document.getElementById('incSeekTime').addEventListener('click', () => {
-      if (seekTime < 60) {
-        seekTime += 5;
+      if (vids_seek_option.length === 1) {
+        return;
+      }
+
+      if (vids_seek_index < (vids_seek_option.length - 1)) {
+        vids_seek_index += 1;
+
+        document.getElementById('decSeekTimeBtn').removeAttribute("disabled");
+        document.getElementById('decSeekTimeBtn').classList.add('activate-button');
+
+        if (vids_seek_index === vids_seek_option.length - 1) {
+          document.getElementById('incSeekTime').setAttribute("disabled", "disabled");
+          document.getElementById('incSeekTime').classList.remove('activate-button');
+        }
       }
 
       updateSeekTime();
@@ -78,16 +155,17 @@ const VideoPlayer = ({ videoItem }) => {
       switch (e.key) {
         case 'ArrowLeft':
           e.preventDefault();
-          dp.seek(dp.video.currentTime - seekTime);
+          dp.seek(dp.video.currentTime - vids_seek_option[vids_seek_index]);
           break;
 
         case 'ArrowRight':
           e.preventDefault();
-          dp.seek(dp.video.currentTime + seekTime);
+          dp.seek(dp.video.currentTime + vids_seek_option[vids_seek_index]);
           break;
 
       }
     });
+
 
     return () => dp.destroy();
   }, []);
