@@ -5,6 +5,7 @@ export const video_data = [
     isAd: true,
     video_id: 1,
     videoUrl: SAMPLE,
+    duration: 212,
     video_screenshot_url:
       "https://yt3.ggpht.com/proxy/XgwxfBuuuXzmvcWfP1QiNLvV98eGwudvELKY4kq9VXTsiCAV_h9bDQj6cgibGFijMdPqRaADvGJhtA9rEuO0jwQOE5h86K3q9_iLEppYVEm7goVTUYtRrPea6-mmrZFBYGOXi9HGf1rwgw=w1152-h603-nd",
     avatar_url: "https://api.dicebear.com/7.x/miniavs/svg?seed=8",
@@ -14,6 +15,7 @@ export const video_data = [
   {
     video_id: 2,
     videoUrl: SAMPLE,
+    duration: 212,
     video_screenshot_url:
       "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLDv2Q0yAnW19SsfDxlWNZc2MfRnvQ",
     avatar_url: "https://api.dicebear.com/7.x/miniavs/svg?seed=8",
@@ -23,6 +25,7 @@ export const video_data = [
   {
     video_id: 3,
     videoUrl: SAMPLE,
+    duration: 212,
     video_screenshot_url:
       "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLDv2Q0yAnW19SsfDxlWNZc2MfRnvQ",
     avatar_url: "https://api.dicebear.com/7.x/miniavs/svg?seed=8",
@@ -32,6 +35,7 @@ export const video_data = [
   {
     video_id: 4,
     videoUrl: SAMPLE,
+    duration: 212,
     video_screenshot_url:
       "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLDv2Q0yAnW19SsfDxlWNZc2MfRnvQ",
     avatar_url: "https://api.dicebear.com/7.x/miniavs/svg?seed=8",

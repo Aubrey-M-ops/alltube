@@ -1,25 +1,64 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, forwardRef, useImperativeHandle } from "react";
 import DPlayer from "dplayer";
 import "./index.scss";
 
-const VideoPlayer = ({ videoItem }) => {
+const VideoPlayer = forwardRef(({ videoItem, onTimeUpdate, onDuration }, ref) => {
   const playerRef = useRef(null);
+  const playerInstanceRef = useRef(null);
+  const videoElementRef = useRef(null);
+
+  useImperativeHandle(ref, () => ({
+    seekTo: (time) => {
+      if (playerInstanceRef.current) {
+        playerInstanceRef.current.seek(time);
+      }
+    }
+  }));
 
   useEffect(() => {
-    if (!playerRef.current) return;
+    if (!playerRef.current || !videoItem?.videoUrl) return;
 
-    const dp = new DPlayer({
-      container: playerRef.current,
-      autoplay: true,
-      video: {
-        url: videoItem.videoUrl,
-      },
-    });
+    try {
+      const dp = new DPlayer({
+        container: playerRef.current,
+        autoplay: true,
+        video: {
+          url: videoItem.videoUrl,
+        },
+      });
 
-    return () => dp.destroy();
-  }, []);
+      playerInstanceRef.current = dp;
+      videoElementRef.current = dp.video;
 
-  return <div ref={playerRef} style={{ width: "100%", height: "500px" }} />;
-};
+      const handleTimeUpdate = () => {
+        onTimeUpdate?.(dp.video.currentTime);
+      };
+
+      const handleLoadedMetadata = () => {
+        onDuration?.(dp.video.duration);
+      };
+
+      // Use native event listeners
+      if (videoElementRef.current) {
+        videoElementRef.current.addEventListener('timeupdate', handleTimeUpdate);
+        videoElementRef.current.addEventListener('loadedmetadata', handleLoadedMetadata);
+      }
+
+      return () => {
+        if (videoElementRef.current) {
+          videoElementRef.current.removeEventListener('timeupdate', handleTimeUpdate);
+          videoElementRef.current.removeEventListener('loadedmetadata', handleLoadedMetadata);
+        }
+        dp.destroy();
+      };
+    } catch (error) {
+      console.error("Video player initialization error:", error);
+    }
+  }, [videoItem.videoUrl, onTimeUpdate, onDuration]);
+
+  return videoItem?.videoUrl ? (
+    <div ref={playerRef} className="video-player-container" />
+  ) : null;
+});
 
 export default VideoPlayer;
