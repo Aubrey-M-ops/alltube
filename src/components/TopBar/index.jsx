@@ -1,19 +1,19 @@
 import React from "react";
-import youtubeLogo from "@assets/images/youtube-logo.png";
 import guideToggle from "@assets/images/guide-button.png";
 import searchBar from "@assets/images/search-bar.png";
 import accountInfo from "@assets/images/account-info.png";
+import alltubeLogo from "@assets/images/alltube-home.jpg";
 
 import "./index.scss";
 
-const TopBar = () => {
+const TopBar = ({ toggleSidebar }) => {
   return (
     <>
       <div id="background" className="style-scope ytd-masthead"></div>
       <div id="container" className="style-scope ytd-masthead">
         <div id="start" className="style-scope ytd-masthead">
           {/* Start toggle */}
-          <a id="guide-button" className="style-scope ytd-masthead">
+          <a id="guide-button" className="style-scope ytd-masthead" onClick={toggleSidebar} >
             <img src={guideToggle} />
           </a>
           {/* start logo */}
@@ -23,7 +23,7 @@ const TopBar = () => {
             styles="cursor: hover"
             onClick={() => (window.location.href = "/")}
           >
-            <img src={youtubeLogo} />
+            <img src={alltubeLogo} />
           </a>
         </div>
         {/* search bar */}

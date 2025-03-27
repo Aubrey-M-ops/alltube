@@ -1,6 +1,7 @@
 import React from "react";
 import classNames from "classnames";
-import { Avatar, Card } from "antd";
+import OutSiteIcon from "@assets/icons/OutSite";
+import { Avatar, Card, Tooltip, Button } from "antd";
 const { Meta } = Card;
 import "./index.scss";
 
@@ -14,11 +15,31 @@ const HomeVideoCard = ({ videoData }) => {
   } = videoData;
   return (
     <Card
-      className={classNames("homepage-card", {
-        "homepage-card-ad": videoData.isAd,
-      })}
+      className="homepage-card"
       variant="borderless"
-      cover={<img alt="video_screenshot" src={video_screenshot_url} />}
+      cover={
+        <>
+          <img
+            className={classNames("homepage-card-cover", {
+              "homepage-card-cover-ad": videoData.isAd,
+            })}
+            alt="video_screenshot"
+            src={video_screenshot_url}
+          />
+          {videoData.isAd ? (
+            <Tooltip title="Visit the site">
+              <Button
+                shape="circle"
+                icon={<OutSiteIcon />}
+                onClick={(e) => {
+                  window.open("https://colab.google/", "_blank");
+                  e.stopPropagation();
+                }}
+              />
+            </Tooltip>
+          ) : null}
+        </>
+      }
       onClick={() => {
         window.location.href = `/video?video_id=${video_id}`;
       }}
@@ -26,7 +47,14 @@ const HomeVideoCard = ({ videoData }) => {
       <Meta
         avatar={<Avatar src={avatar_url} />}
         title={video_title}
-        description={video_description}
+        description={
+          <>
+            {videoData.isAd ? (
+              <strong style={{ color: "white" }}>sponsored · </strong>
+            ) : null}
+            {video_description}
+          </>
+        }
       />
     </Card>
   );

@@ -44,16 +44,22 @@ const formatKey = () => {
   return _key || "home";
 };
 
-const SideBar = () => {
+const SideBar = ({ collapsed }) => {
   const navigate = useNavigate();
   return (
-    <div id="sidebar">
+    <div id="sidebar"
+      style={{
+      width: collapsed ? "60px" : "260px", 
+      transition: "width 0.3s ease",
+      }}
+    >
       <Menu
         defaultSelectedKeys={["home"]}
         selectedKeys={[formatKey()]}
         mode="inline"
         theme="dark"
         items={items}
+        inlineCollapsed={collapsed}
         onSelect={({ item, key }) => {
           console.log("item", item, key);
           // replace url
