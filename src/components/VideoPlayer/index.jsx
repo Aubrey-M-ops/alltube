@@ -32,6 +32,7 @@ const VideoPlayer = forwardRef(({ videoItem, onTimeUpdate, onDuration }, ref) =>
 
     try {
       const dp = new DPlayer({
+        lang: 'en',
         container: playerRef.current,
         autoplay: true,
         hotkey: false,
