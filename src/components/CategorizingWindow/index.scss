@@ -1,0 +1,91 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+  }
+
+  .modal-content label {
+    display: flex;
+    align-items: left;
+    color: black;
+  }
+  
+  h2 {
+    margin-bottom: 10px;
+    color: black;
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .nested-option {
+    margin-top: 10px;
+    color: black;
+
+  }
+  
+  .nested-option label {
+    display: flex;
+    align-items: left;
+    color: black;
+  }
+  
+  .nested-option input[type="checkbox"] {
+    margin-left: 5px; /* 复选框向左对齐 */
+    align-items: left;
+  }
+  
+  .nested-option select {
+    width: 100%; /* 与输入框一样宽度 */
+    margin-top: 5px; /* 与复选框分开 */
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+  }
+  
+  button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: auto; /* 适配文字宽度 */
+    height: auto;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+
+  .checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .checkbox-container span {
+    margin-left: 5px; /* 调整描述文字与复选框之间的间距 */
+  }
