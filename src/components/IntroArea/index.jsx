@@ -24,6 +24,7 @@ const IntroArea = () => {
         <img className="intro-image-left" src={DownLeft} alt="Left" />
         <button className="overlay-button" onClick={openModal}>
           <img src={CategorizingWindowButton} alt="Button Icon" className="button-icon" />
+          <span>Add to playlist</span>
         </button>
       </div>
       <img className="intro-image-right" src={DownRight} alt="Right" />

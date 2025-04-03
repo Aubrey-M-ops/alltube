@@ -12,12 +12,23 @@ const CategorizingWindow = ({ onClose }) => {
     .sort((a, b) => a.name.localeCompare(b.name)); // 按字母顺序排序
 
     const handleCreate = () => {
-        if (window.confirm("Are you sure you want to create this playlist?")) {
-          // 执行创建操作
-          console.log("Playlist created:", labelName);
-          onClose(); // 关闭窗口
-        }
+      if (!labelName.trim()) {
+        alert("Playlist name cannot be empty.");
+        return;
       }
+  
+      const nameExists = playlist_data.some((playlist) => playlist.name === labelName.trim());
+      if (nameExists) {
+        alert("Playlist name already exists. Please choose a different name.");
+        return;
+      }
+  
+      if (window.confirm("Are you sure you want to create the playlist and add the video into it?")) {
+        // 执行创建操作
+        console.log("Playlist created:", labelName);
+        onClose(); // 关闭窗口
+      }
+    };
     const handleCateGorizing = () => {
         if (window.confirm("Are you sure you want to categorize the video to this playlist?")) {
           // 执行创建操作
@@ -69,7 +80,7 @@ const CategorizingWindow = ({ onClose }) => {
         {/* 按钮 */}
         <div className="button-group">
           <button onClick={onClose}>Cancel</button>
-          <button onClick={isNested ? handleCreate:handleCateGorizing}>{isNested ? "Create" : "Categorize"}</button>
+          <button onClick={isNested ? handleCreate:handleCateGorizing}>{isNested ? "Create and Add" : "Categorize"}</button>
         </div>
       </div>
     </div>

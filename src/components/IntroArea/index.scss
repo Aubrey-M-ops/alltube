@@ -5,17 +5,15 @@
   flex-wrap: nowrap;
   align-items: flex-start;
   width: 100%;
-  .intro-image {
-    &-left {
-      width: 100%;
-    }
-    &-right {
-      width: 40%;
-    }
-  }
 }
 
+.intro-image-left {
+  width: 100%;
+}
 
+.intro-image-right {
+  width: 40%;
+}
 
 .image-container {
   position: relative;
@@ -26,24 +24,26 @@
 .overlay-button {
   position: absolute;
   top: 16%;
-  left: 49%;
-  transform: translate(-50%, -50%); // 居中按钮
+  left: 43%;
+  transform: translate(-50%, -50%);
   background-color: #3e3e3e;
   color: white;
   border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 18px;
+  border-radius: 20px; /* 两头圆中间平 */
+  padding: 10px 20px; /* 调整按钮内边距 */
+  font-size: 14px;
   cursor: pointer;
-  z-index: 10; // 确保按钮显示在最前面
+  z-index: 10;
 
-  .button-icon {
-    width: 25px; // 调整图片大小
-    height: 25px;
+  display: flex;
+  align-items: center;
+}
 
-    filter: invert(100%);
-  }
+.button-icon {
+  width: 25px; /* 调整图片大小 */
+  height: 25px;
+  margin-right: 5px; /* 调整图标与文字之间的间距 */
+  filter: invert(100%);
 }
 
 /* 鼠标悬停时按钮样式 */
